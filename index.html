@@ -25,8 +25,8 @@
     <!-- loading modules -->
     <script>
         require([
-            "esri/config", "esri/Map", "esri/views/MapView" 
-        ], (esriConfig, Map, MapView) => {
+            "esri/config", "esri/Map", "esri/views/MapView", "esri/widgets/Locate" 
+        ], (esriConfig, Map, MapView, Locate) => {
             esriConfig.apiKey = "AAPK1bafb1fd1b984000a2a5ab965ed0cf111GDugMmnipDNIQH9yaN93addT3iTZzAKwGLSLBZvZJBkFTaRPkJjvEi2gCoqyJml";
 
             const map = new Map({
@@ -38,6 +38,25 @@
                 center: [114.074134, 22.271002], // Longitude, latitude of Hong Kong
                 zoom: 12, // Zoom level
                 map: map // References the map object
+            });
+
+            const locateBtn = new Locate({
+                view: view
+            });
+
+            // Add the locate widget to the top left corner of the view
+            view.ui.add(locateBtn, {
+                position: "top-left"
+            });
+
+            const searchWidget = new Search({
+                view: view
+            });
+
+            // Adds the search widget below other elements in the top left corner of the view
+            view.ui.add(searchWidget, {
+                position: "top-right",
+                index: 2
             });
 
         });
